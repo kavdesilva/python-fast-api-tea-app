@@ -7,3 +7,7 @@ export async function teaIndex() {
 export async function showTea(teaId) {
     return sendRequest(`${BASE_URL}/${teaId}`)
 }
+
+export async function deleteTea(teaId) {
+    return sendRequest(`${BASE_URL}/${teaId}`, "DELETE")
+}

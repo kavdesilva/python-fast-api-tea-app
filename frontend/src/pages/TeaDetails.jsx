@@ -41,6 +41,18 @@ const TeaDetails = (props) => {
         <p><strong>Rating:</strong> {tea.rating}/5</p>
         <p><strong>In Stock:</strong> {tea.in_stock ? 'Yes' : 'No'}</p>
         <p><strong>ID:</strong> {tea.id}</p>
+          <div>
+          <strong>Comments:</strong>
+          {tea.comments && tea.comments.length > 0 ? (
+            <ul>
+              {tea.comments.map((comment) => (
+                <li key={comment.id}>{comment.content}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No comments yet.</p>
+          )}
+        </div>
       </div>
 
       <div className="tea-actions">

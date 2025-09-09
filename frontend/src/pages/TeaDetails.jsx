@@ -50,7 +50,7 @@ const TeaDetails = (props) => {
               ))}
             </ul>
           ) : (
-            <p>No comments yet.</p>
+            <p>No comments yet..</p>
           )}
         </div>
       </div>

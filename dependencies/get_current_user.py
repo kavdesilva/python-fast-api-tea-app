@@ -5,12 +5,13 @@ from sqlalchemy.orm import Session
 from models.user import UserModel
 from database import get_db
 import jwt
-from jwt import DecodeError, ExpiredSignatureError # We import specific exceptions to handle them explicitly
+from jwt.api_jwt import DecodeError, ExpiredSignatureError
 from config.environment import secret
 
 http_bearer = HTTPBearer()
 
-
+# def get_current_user():
+#     pass
 # This function takes the database session and the JWT token from the request header
 def get_current_user(db: Session = Depends(get_db), token: str = Depends(http_bearer)):
 
@@ -19,7 +20,7 @@ def get_current_user(db: Session = Depends(get_db), token: str = Depends(http_be
         payload = jwt.decode(token.credentials, secret, algorithms=["HS256"])
 
         # Query the database to find the user with the ID from the token's payload
-        user = db.query(UserModel).filter(UserModel.id == payload.get("sub")).first()
+        user = db.query(UserModel).filter(UserModel.id == int(payload.get("sub"))).first()
 
         # If no user is found, raise an HTTP 401 Unauthorized error
         if not user:

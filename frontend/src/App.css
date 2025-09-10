@@ -44,6 +44,7 @@ h1 {
   flex-wrap: wrap;
   gap: 1rem;
   margin: 1rem 0;
+  justify-content: space-evenly;
 }
 
 .teas-grid > * {
@@ -75,10 +76,6 @@ h1 {
   justify-content: space-between;
 }
 
-.teas-grid {
-  display: flex;
-  justify-content: space-evenly;
-}
 
 .tea-actions {
   display: flex;
@@ -116,4 +113,13 @@ input[type="number"] {
 button {
   margin: 0 auto;
   max-width: fit-content;
+}
+
+.home-features {
+  padding: 0;
+  list-style:inside;
+}
+
+.comments-container > ul {
+  padding: 0
 }

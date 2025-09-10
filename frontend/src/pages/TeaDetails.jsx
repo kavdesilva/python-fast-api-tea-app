@@ -51,7 +51,18 @@ const TeaDetails = () => {
           Back to Tea List
         </a>
       </div>
-
+      
+      <div className="comments-container">
+        <ul>
+          {tea.comments?.length > 0 ? tea.comments.map(comment => {
+            return <li>
+              {comment.content}
+            </li> 
+          })
+            : <p>No comments available</p>
+          }
+        </ul>
+      </div>
     </div>
   )
 };

@@ -36,7 +36,7 @@ def update_tea(tea_id: int, tea: TeaSchema, db: Session = Depends(get_db)):
     if not db_tea:
         raise HTTPException(status_code=404, detail="Tea not found")
 
-    tea_data = tea.dict(exclude_unset=True)  # Only update the fields provided
+    tea_data = tea.dict(exclude_unset=True, exclude={'id', 'comments'})  # Only update the fields provided
     for key, value in tea_data.items():
         setattr(db_tea, key, value)
 

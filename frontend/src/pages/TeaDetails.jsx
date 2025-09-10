@@ -1,10 +1,9 @@
-import React, { use } from "react"
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom'
 import { showTea, deleteTea } from "../../utilities/teas-api";
 import teaPlaceHolder from '../assets/cute_tea.jpg'
 
-const TeaDetails = (props) => {
+const TeaDetails = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const [tea, setTea] = useState({})
@@ -44,6 +43,7 @@ const TeaDetails = (props) => {
       </div>
 
       <div className="tea-actions">
+        <a href={`/teas/${tea.id}/edit`}>Edit Tea</a>
         <button onClick={handleDelete} className="btn-delete">
           Delete Tea
         </button>

@@ -13,6 +13,7 @@ const TeaDetails = () => {
       try {
         const teaData = await showTea(id)
         setTea(teaData)
+        console.log(teaData.comments)
       } catch (error) {
         console.log(error)
       }
@@ -52,6 +53,22 @@ const TeaDetails = () => {
         </a>
       </div>
 
+      <div className="tea-comments">
+        <div className="comment-form">
+          
+        </div>
+        {tea.comments && tea.comments.length > 0 ? (
+          <>
+            {tea.comments.map(comment => (
+              <div key={comment.id} className="comment-card">
+                <p>{comment.content}</p>
+              </div>
+            ))}
+          </>
+        ) : (
+          <p>No comments to display.</p>
+        )}
+      </div>
     </div>
   )
 };

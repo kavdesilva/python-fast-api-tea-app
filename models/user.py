@@ -3,9 +3,8 @@ from .base import BaseModel
 from passlib.context import CryptContext # Import new package
 from datetime import datetime, timedelta, timezone  # New import for timestamps
 import jwt  # New import for token generation
-
-# Import the secret from the environment file
-from config.environment import secret
+from config.environment import secret # Import the secret from the environment file
+from sqlalchemy.orm import relationship
 
 # Creating a password hashing context using bcrypt
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -18,6 +17,9 @@ class UserModel(BaseModel):
     username = Column(String, unique=True)  # Each username must be unique
     email = Column(String, unique=True)  # Each email must be unique
     password_hash = Column(String, nullable=True)  # Add new field for storing the hashed password
+
+     # NEW: Relationship - a user can have multiple teas
+    teas = relationship('TeaModel', back_populates='user')
 
     def set_password(self, password: str):
         self.password_hash = pwd_context.hash(password)

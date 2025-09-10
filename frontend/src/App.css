@@ -119,3 +119,7 @@ button {
   padding: 0;
   list-style:inside;
 }
+
+.comments-container > ul {
+  padding: 0
+}

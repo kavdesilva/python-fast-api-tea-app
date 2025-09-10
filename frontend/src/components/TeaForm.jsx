@@ -39,7 +39,7 @@ const TeaForm = ({onSubmit, initialData}) => {
     e.preventDefault()
     try {
       const tea = await onSubmit(formData)
-      navigate(`/teas/${tea?.id}`)
+      if (tea) navigate(`/teas/${tea?.id}`)
     } catch (error) {
       console.error(error)
     }

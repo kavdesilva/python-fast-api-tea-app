@@ -26,21 +26,13 @@ class UserModel(BaseModel):
     def verify_password(self, password: str) -> bool:
         return pwd_context.verify(password, self.password_hash)
 
-    def generate_token(self):
-        # Debug the user ID
-        print(f"DEBUG - User ID: {self.id}")
-        print(f"DEBUG - User ID type: {type(self.id)}")
-        
+    def generate_token(self):        
         # Define the payload
         payload = {
             "exp": datetime.now(timezone.utc) + timedelta(days=1), # Expiration time (1 day)
             "iat": datetime.now(timezone.utc), # Issued at time
             "sub": str(self.id), # Subject - the user ID
         }
-        
-        print(f"DEBUG - Payload sub: '{payload['sub']}'")
-        print(f"DEBUG - Payload sub type: {type(payload['sub'])}")
-        
         # Create the JWT token
         token = jwt.encode(payload, secret, algorithm="HS256")
         return token

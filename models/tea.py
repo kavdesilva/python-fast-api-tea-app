@@ -13,4 +13,4 @@ class TeaModel(BaseModel):
     in_stock = Column(Boolean)
     rating = Column(Integer)
 
-    comments = relationship("CommentModel", back_populates="tea", cascade="all, delete-orphan")
+    comments = relationship("CommentModel", back_populates="tea")

@@ -1,17 +1,11 @@
-import { Link } from 'react-router-dom';
+import React from "react"
 
-export default function Nav() {
+const Nav = (props) => {
   return (
-    <nav className="nav">
-      <div className="nav-logo">
-        <Link to="/">Tea Collection 🫖</Link>
-      </div>
+    <div>
       
-      <div className="nav-links">
-        <Link to="/" className={'nav-link'}>Home</Link>
-        <Link to="/teas" className={'nav-link'}>All Teas</Link>
-        <Link to="/teas/new" className={'nav-link'}>Add Tea</Link>
-      </div>
-    </nav>
-  );
-}
+    </div>
+  )
+};
+
+export default Nav;

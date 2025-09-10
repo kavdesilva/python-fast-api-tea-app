@@ -1,9 +1,10 @@
+import React, { use } from "react"
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom'
 import { showTea, deleteTea } from "../../utilities/teas-api";
 import teaPlaceHolder from '../assets/cute_tea.jpg'
 
-const TeaDetails = () => {
+const TeaDetails = (props) => {
   const { id } = useParams()
   const navigate = useNavigate()
   const [tea, setTea] = useState({})
@@ -40,10 +41,21 @@ const TeaDetails = () => {
         <p><strong>Rating:</strong> {tea.rating}/5</p>
         <p><strong>In Stock:</strong> {tea.in_stock ? 'Yes' : 'No'}</p>
         <p><strong>ID:</strong> {tea.id}</p>
+          <div>
+          <strong>Comments:</strong>
+          {tea.comments && tea.comments.length > 0 ? (
+            <ul>
+              {tea.comments.map((comment) => (
+                <li key={comment.id}>{comment.content}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No comments yet..</p>
+          )}
+        </div>
       </div>
 
       <div className="tea-actions">
-        <a href={`/teas/${tea.id}/edit`}>Edit Tea</a>
         <button onClick={handleDelete} className="btn-delete">
           Delete Tea
         </button>
@@ -51,18 +63,7 @@ const TeaDetails = () => {
           Back to Tea List
         </a>
       </div>
-      
-      <div className="comments-container">
-        <ul>
-          {tea.comments?.length > 0 ? tea.comments.map(comment => {
-            return <li>
-              {comment.content}
-            </li> 
-          })
-            : <p>No comments available</p>
-          }
-        </ul>
-      </div>
+
     </div>
   )
 };

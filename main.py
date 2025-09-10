@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from controllers.teas import router as TeasRouter
-from controllers.users import router as UsersRouter
 
 app = FastAPI()
 
@@ -14,7 +13,6 @@ app.add_middleware(
 )
 
 app.include_router(TeasRouter, prefix='/api')
-app.include_router(UsersRouter, prefix='/api')
 
 @app.get('/')
 def home():

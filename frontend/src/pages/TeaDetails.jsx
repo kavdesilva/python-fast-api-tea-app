@@ -6,7 +6,7 @@ import teaPlaceHolder from '../assets/cute_tea.jpg'
 import CommentCard from '../components/CommentCard'
 import CommentForm from "../components/CommentForm";
 
-const TeaDetails = () => {
+const TeaDetails = ({ user }) => {
   const { id } = useParams()
   const navigate = useNavigate()
   const [tea, setTea] = useState({})
@@ -16,7 +16,6 @@ const TeaDetails = () => {
       try {
         const teaData = await showTea(id)
         setTea(teaData)
-        console.log(teaData.comments)
       } catch (error) {
         console.log(error)
       }
@@ -55,7 +54,8 @@ const TeaDetails = () => {
         <p><strong>ID:</strong> {tea.id}</p>
       </div>
 
-      <div className="tea-actions">
+      {user === tea.user?.id.toString() &&
+        <div className="tea-actions">
         <a href={`/teas/${tea.id}/edit`}>Edit Tea</a>
         <button onClick={handleDelete} className="btn-delete">
           Delete Tea
@@ -64,13 +64,14 @@ const TeaDetails = () => {
           Back to Tea List
         </a>
       </div>
+      }
 
       <div className="tea-comments">
-        <CommentForm onSubmit={handleCreateComment} />
+        <CommentForm onSubmit={handleCreateComment} tea={tea} />
         {tea.comments && tea.comments.length > 0 ? (
           <>
             {tea.comments.map(comment => (
-              <CommentCard comment={comment} />
+              <CommentCard comment={comment} user={user} tea={tea}/>
             ))}
           </>
         ) : (

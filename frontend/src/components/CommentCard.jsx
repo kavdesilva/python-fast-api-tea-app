@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useParams } from "react-router";
 import CommentForm from "./CommentForm";
 import { updateComment } from "../../utilities/comments-api";
 
-const CommentCard = ({comment}) => {
-  const {id} = useParams()
+const CommentCard = ({ comment, user, tea={tea} }) => {
+
   const [editing, setEditing] = useState(false)
 
   const handleEdit = () => {
@@ -12,7 +11,7 @@ const CommentCard = ({comment}) => {
   }
   
   const handleUpdate = async (data) => {
-    const updatedComment = await updateComment(id, data)
+    const updatedComment = await updateComment(comment.id, data)
     return updatedComment
   }
 
@@ -22,11 +21,11 @@ const CommentCard = ({comment}) => {
         <>
           <p>{comment.user?.username} says:</p>
           <p>{comment.content}</p>
-          <button onClick={handleEdit}>Edit</button>
+          {user === comment.user?.id.toString() && <button onClick={handleEdit}>Edit</button>}
         </>
         :
         <>
-          <CommentForm commentData={comment} onSubmit={handleUpdate}/>
+          <CommentForm commentData={comment} onSubmit={handleUpdate} tea={tea} handleEdit={handleEdit} editing={editing}/>
           <button onClick={handleEdit}>Cancel Edit</button>
         </>
         }

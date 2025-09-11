@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 
-const CommentForm = ({commentData, onSubmit}) => {
+const CommentForm = ({commentData, onSubmit, tea, handleEdit, editing}) => {
   const navigate = useNavigate()
 
   const initialState = {
@@ -28,7 +28,8 @@ const CommentForm = ({commentData, onSubmit}) => {
     e.preventDefault()
     try {
         const comment = await onSubmit(formData)
-        if (comment) navigate(`/teas/${tea?.id}`)
+        if (editing === true) handleEdit(false)
+        navigate(0)
     } catch (error) {
         console.error(error)
     }

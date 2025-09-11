@@ -29,7 +29,7 @@ const CommentForm = ({commentData, onSubmit, tea, handleEdit, editing}) => {
     try {
         const comment = await onSubmit(formData)
         if (editing === true) handleEdit(false)
-        navigate(0)
+        navigate(`/teas/${tea.id}`)
     } catch (error) {
         console.error(error)
     }
@@ -39,7 +39,7 @@ const CommentForm = ({commentData, onSubmit, tea, handleEdit, editing}) => {
     <div className="comment-form" key={commentData?.id}>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-            <label htmlFor="content">Comment:</label>
+            <label htmlFor="content">Comment:</label><br/>
             <input type="text" 
                 name="content"
                 id="content"

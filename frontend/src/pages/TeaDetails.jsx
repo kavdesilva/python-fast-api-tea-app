@@ -56,14 +56,14 @@ const TeaDetails = ({ user }) => {
 
       {user === tea.user?.id.toString() &&
         <div className="tea-actions">
-        <a href={`/teas/${tea.id}/edit`}>Edit Tea</a>
-        <button onClick={handleDelete} className="btn-delete">
-          Delete Tea
-        </button>
-        <a href="/teas" className="btn-back">
-          Back to Tea List
-        </a>
-      </div>
+          <button onClick={()=> navigate(`/teas/${tea.id}/edit`)}>
+            Edit Tea
+          </button>
+          <button onClick={handleDelete} className="btn-delete">
+            Delete Tea
+          </button>
+          <a href="/teas" className="btn-back">Back to Tea List</a>
+        </div>
       }
 
       <div className="tea-comments">

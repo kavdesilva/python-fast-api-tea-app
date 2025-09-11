@@ -8,11 +8,7 @@
 body {
   line-height: 1.6;
   min-height: 100vh;
-  font-size: 1.7rem;
-}
-
-h1 {
-  font-size: 2.5em;
+  font-size: 1.3rem;
 }
 
 .logo {
@@ -59,11 +55,17 @@ h1 {
   padding: 1rem;
   border: 1px solid #e9ecef;
   transition: transform 0.3s ease;
+  margin: 0.5rem auto;
 }
 
 .tea-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tea-card a {
+  display: block;
+  margin-bottom: 1em;
 }
 
 .nav {
@@ -74,15 +76,21 @@ h1 {
 .nav-links {
   display: flex;
   justify-content: space-between;
+  margin: 15px auto;
 }
 
 
-.tea-actions {
+.tea-actions, .comment-actions {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   width: 50%;
   margin: 0 auto;
+}
+
+.btn-back {
+  flex-basis: 100%;
+  margin: 15px auto;
 }
 
 .tea-placeholder {
@@ -112,7 +120,7 @@ input[type="number"] {
 }
 
 button {
-  margin: 0 auto;
+  margin: 5px auto;
   max-width: fit-content;
 }
 
@@ -123,4 +131,11 @@ button {
 
 .comments-container > ul {
   padding: 0
+}
+
+.comment-card {
+  border-radius: 10px;
+  padding: 1rem;
+  border: 1px solid #e9ecef;
+  margin: 15px;
 }

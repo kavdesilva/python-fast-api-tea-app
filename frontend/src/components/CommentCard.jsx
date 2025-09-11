@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import CommentForm from "./CommentForm";
-import { updateComment } from "../../utilities/comments-api";
+import { updateComment, deleteComment } from "../../utilities/comments-api";
 
-const CommentCard = ({ comment, user, tea={tea} }) => {
+const CommentCard = ({ comment, user, tea }) => {
+  const navigate = useNavigate()
 
   const [editing, setEditing] = useState(false)
 
@@ -15,13 +17,21 @@ const CommentCard = ({ comment, user, tea={tea} }) => {
     return updatedComment
   }
 
+  const handleDelete = async () => {
+    const deletedComment = await deleteComment(comment.id)
+    navigate(`/teas/${tea.id}`)
+  }
+
   return (
     <div key={comment.id} className="comment-card">
         {!editing ? 
         <>
           <p>{comment.user?.username} says:</p>
           <p>{comment.content}</p>
-          {user === comment.user?.id.toString() && <button onClick={handleEdit}>Edit</button>}
+          <div className="comment-actions">
+            {user === comment.user?.id.toString() && <button onClick={handleEdit}>Edit</button>}
+            {user === comment.user?.id.toString() && <button onClick={handleDelete}>Delete</button>}
+          </div>
         </>
         :
         <>

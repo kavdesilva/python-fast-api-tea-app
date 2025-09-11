@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { teaIndex } from "../../utilities/teas-api";
+import TeaCard from '../components/TeaCard'
 
 const TeaIndex = () => {
   const [teas, setTeas] = useState([])
@@ -21,15 +22,8 @@ const TeaIndex = () => {
       <h1>Tea Collection</h1>
       <div className="teas-grid">
 
-        {teas?.map((tea, i) => (
-            <div className="tea-card">
-              <h3>{tea.name}</h3>
-              <p>Rating: {tea.rating}/5</p>
-              <p>In Stock: {tea.in_stock ? 'Yes' : 'No'}</p>
-              <div className="tea-actions">
-                <a href={`/teas/${tea.id}`}>View Details</a>
-              </div>
-            </div>
+        {teas?.map(tea => (
+          <TeaCard tea={tea} />
         ))}
       </div>
     </div>

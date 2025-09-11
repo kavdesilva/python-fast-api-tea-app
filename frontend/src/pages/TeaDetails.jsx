@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom'
 import { showTea, deleteTea } from "../../utilities/teas-api";
+import { createComment } from '../../utilities/comments-api'
 import teaPlaceHolder from '../assets/cute_tea.jpg'
+import CommentCard from '../components/CommentCard'
+import CommentForm from "../components/CommentForm";
 
 const TeaDetails = () => {
   const { id } = useParams()
@@ -31,6 +34,15 @@ const TeaDetails = () => {
     }
   }
 
+  const handleCreateComment = async (data) => {
+    try {
+      const newComment = await createComment(tea.id, data)
+      return newComment
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div className="tea-details">
       <h1>Tea Details</h1>
@@ -54,15 +66,11 @@ const TeaDetails = () => {
       </div>
 
       <div className="tea-comments">
-        <div className="comment-form">
-          
-        </div>
+        <CommentForm onSubmit={handleCreateComment} />
         {tea.comments && tea.comments.length > 0 ? (
           <>
             {tea.comments.map(comment => (
-              <div key={comment.id} className="comment-card">
-                <p>{comment.content}</p>
-              </div>
+              <CommentCard comment={comment} />
             ))}
           </>
         ) : (

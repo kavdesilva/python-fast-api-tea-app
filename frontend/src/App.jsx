@@ -12,14 +12,7 @@ import SignUp from './pages/SignUp'
 import Login from './pages/Login'
 
 function App() {
-  const [user, setUser] = useState[null]
-  // const user = {
-  //   id: 7,
-  //   username: "arthur",
-  //   email: "art@gmail.com"
-  // }
-
-  // const user = null
+  const [user, setUser] = useState(getUser())
 
   const logUser = (user) => (
     setUser(user)

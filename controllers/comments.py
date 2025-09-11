@@ -17,6 +17,13 @@ def get_comments_for_tea(tea_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Tea not found")
     return tea.comments
 
+@router.get("/auth/{user_id}/comments", response_model=List[CommentSchema])
+def get_comments_for_user(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(UserModel).filter(UserModel.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user.comments
+
 @router.get("/comments/{comment_id}", response_model=CommentSchema)
 def get_comment(comment_id: int, db: Session = Depends(get_db)):
     comment = db.query(CommentModel).filter(CommentModel.id == comment_id).first()

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from typing import List
 from models.user import UserModel
 from serializers.user import UserSchema, UserToken, UserLogin, UserResponseSchema
 from database import get_db
@@ -42,3 +43,15 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
 
     # Return token and a success message
     return {"token": token, "message": "Login successful"}
+
+@router.get('/users', response_model=List[UserResponseSchema])
+def get_users(db: Session=Depends(get_db)):
+    users = db.query(UserModel).all()
+    return users
+
+@router.get("/users/{user_id}", response_model=UserResponseSchema)
+def get_single_user(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(UserModel).filter(UserModel.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user

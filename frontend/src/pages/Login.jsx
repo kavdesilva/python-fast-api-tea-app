@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { login } from "../../utilities/users-api";
+import { login } from "../../utilities/users-service";
 
 const Login = ({ logUser }) => {
     const navigate = useNavigate()
@@ -18,6 +18,7 @@ const Login = ({ logUser }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const user = await login(formState)
+        console.log(user)
         logUser(user)
         navigate('/')
     }

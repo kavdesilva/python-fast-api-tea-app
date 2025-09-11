@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { signUp } from "../../utilities/users-api";
+import { signUp } from "../../utilities/users-service";
 
 const SignUp = ({logUser}) => {
 
@@ -20,8 +20,7 @@ const SignUp = ({logUser}) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const user = await signUp(formState)
-        logUser(user)
-        navigate('/')
+        if (user) navigate('/login')
     }
 
   return (
@@ -46,7 +45,7 @@ const SignUp = ({logUser}) => {
           name="password"
           onChange={handleChange}/>
       </div>
-      <button type='submit'>Log In</button>
+      <button type='submit'>Sign Up</button>
       </form>
       <p>Already a user? <Link to='/login'>Log in here.</Link></p>
     </div>

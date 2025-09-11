@@ -21,13 +21,13 @@ export default function Nav({user}) {
         <Link to="/teas" className={'nav-link'}>All Teas</Link>
         {user ? 
           <>
-            <Link to='/signup'>Sign Up</Link>
-            <Link to='/login'>Log In</Link>
+            <Link to="/teas/new" className={'nav-link'}>Add Tea</Link>
+            <Link onClick={signOut}>Log Out</Link>
           </>
           :
           <>
-            <Link to="/teas/new" className={'nav-link'}>Add Tea</Link>
-            <Link onClick={signOut}>Log Out</Link>
+            <Link to='/signup'>Sign Up</Link>
+            <Link to='/login'>Log In</Link>
           </>
         }
       </div>

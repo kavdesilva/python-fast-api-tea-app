@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { getUser } from '../utilities/users-service'
 import TeaDetails from './pages/TeaDetails'
 import TeaIndex from './pages/TeaIndex'
@@ -13,6 +13,13 @@ import Login from './pages/Login'
 
 function App() {
   const [user, setUser] = useState[null]
+  // const user = {
+  //   id: 7,
+  //   username: "arthur",
+  //   email: "art@gmail.com"
+  // }
+
+  // const user = null
 
   const logUser = (user) => (
     setUser(user)
@@ -22,6 +29,7 @@ function App() {
     <>
       <div className="App">
         <div className="container">
+          <Nav user={user} />
           {user ? 
           <Routes>
             <Route path='/' element={<Home />}/>
@@ -38,7 +46,6 @@ function App() {
             <Route path='/login' element={<Login logUser={logUser} />} />
           </Routes>
           }
-          <Nav user={user} />
         </div>
       </div>
     </>

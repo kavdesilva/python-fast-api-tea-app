@@ -16,7 +16,7 @@ app.add_middleware(
 
 app.include_router(TeasRouter, prefix='/api')
 app.include_router(CommentsRouter, prefix='/api')
-app.include_router(UsersRouter, prefix='/api')
+app.include_router(UsersRouter, prefix='/auth')
 
 @app.get('/')
 def home():

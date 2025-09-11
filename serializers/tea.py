@@ -21,3 +21,8 @@ class TeaCreate(BaseModel):
     name: str
     in_stock: bool
     rating: int
+
+class TeaUpdate(BaseModel):
+    name: str
+    in_stock: bool
+    rating: int

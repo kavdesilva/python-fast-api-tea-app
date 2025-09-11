@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from models.tea import TeaModel
-from serializers.tea import TeaSchema, TeaCreate as TeaCreateSchema
+from serializers.tea import TeaSchema, TeaCreate as TeaCreateSchema, TeaUpdate as TeaUpdateSchema
 from models.user import UserModel  # Import the UserModel to verify the current user
 from typing import List
 from database import get_db
@@ -33,7 +33,7 @@ def create_tea(tea: TeaCreateSchema, db: Session = Depends(get_db), current_user
 
 
 @router.put("/teas/{tea_id}", response_model=TeaSchema)
-def update_tea(tea_id: int, tea: TeaSchema, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
+def update_tea(tea_id: int, tea: TeaUpdateSchema, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
     db_tea = db.query(TeaModel).filter(TeaModel.id == tea_id).first()
     if not db_tea:
         raise HTTPException(status_code=404, detail="Tea not found")

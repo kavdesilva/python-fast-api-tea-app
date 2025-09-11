@@ -18,7 +18,6 @@ const Login = ({ logUser }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const user = await login(formState)
-        console.log(user)
         logUser(user)
         navigate('/')
     }

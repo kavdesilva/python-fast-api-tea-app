@@ -10,6 +10,7 @@ import Nav from './components/Nav'
 import Home from './pages/Home'
 import SignUp from './pages/SignUp'
 import Login from './pages/Login'
+import { Navigate } from 'react-router-dom'
 
 function App() {
   const [user, setUser] = useState(getUser())
@@ -23,22 +24,15 @@ function App() {
       <div className="App">
         <div className="container">
           <Nav user={user} />
-          {user ? 
           <Routes>
             <Route path='/' element={<Home />}/>
             <Route path='/teas' element={<TeaIndex />}/>
-            <Route path='/teas/new' element={<CreateTea user={user} />}/>
-            <Route path='/teas/:id' element={<TeaDetails user={user} />}/>
-            <Route path='/teas/:id/edit' element={<EditTea user={user} />}/>
-          </Routes>
-          :
-          <Routes>
-            <Route path='/' element={<Home />}/>
-            <Route path='/teas' element={<TeaIndex />}/>
+            <Route path='/teas/new' element={user ? <CreateTea user={user} />: <Navigate to='/login' />}/>
+            <Route path='/teas/:id' element={user ? <TeaDetails user={user} />: <Navigate to='/login' />}/>
+            <Route path='/teas/:id/edit' element={user ? <EditTea user={user} />: <Navigate to='/login' />}/>
             <Route path='/signup' element={<SignUp logUser={logUser} />} />
             <Route path='/login' element={<Login logUser={logUser} />} />
           </Routes>
-          }
         </div>
       </div>
     </>

@@ -19,7 +19,7 @@ const CommentCard = ({ comment, user, tea }) => {
 
   const handleDelete = async () => {
     const deletedComment = await deleteComment(comment.id)
-    navigate(`/teas/${tea.id}`)
+    navigate(0)
   }
 
   return (

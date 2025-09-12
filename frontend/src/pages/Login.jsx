@@ -5,6 +5,8 @@ import { login } from "../../utilities/users-service";
 const Login = ({ logUser }) => {
     const navigate = useNavigate()
 
+    const [error, setError] = useState(null)
+
     const initialState = {
         email: '',
         password: ''
@@ -17,9 +19,13 @@ const Login = ({ logUser }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const user = await login(formState)
-        logUser(user)
-        navigate('/')
+        try {
+          const user = await login(formState)
+          logUser(user)
+          navigate('/')
+        } catch (error) {
+          setError(error)
+        }
     }
 
   return (
@@ -41,6 +47,7 @@ const Login = ({ logUser }) => {
       <button type='submit'>Log In</button>
       </form>
       <p>Not a user? <Link to='/signup'>Sign up here.</Link></p>
+      {error && <p className="error-msg">{error.message}. Please try again.</p>}
     </div>
   )
 };

@@ -29,7 +29,7 @@ const CommentForm = ({commentData, onSubmit, tea, handleEdit, editing}) => {
     try {
         const comment = await onSubmit(formData)
         if (editing === true) handleEdit(false)
-        navigate(`/teas/${tea.id}`)
+        navigate(0)
     } catch (error) {
         console.error(error)
     }

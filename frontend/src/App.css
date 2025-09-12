@@ -139,3 +139,7 @@ button {
   border: 1px solid #e9ecef;
   margin: 15px;
 }
+
+.error-msg {
+  color: rgb(248, 60, 60);
+}

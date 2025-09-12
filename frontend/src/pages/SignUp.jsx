@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { signUp } from "../../utilities/users-service";
 
 const SignUp = ({logUser}) => {
+    const [error, setError] = useState(null)
 
     let navigate = useNavigate()
     const initialState = {
@@ -19,8 +20,12 @@ const SignUp = ({logUser}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const user = await signUp(formState)
-        if (user) navigate('/login')
+        try {
+          const user = await signUp(formState)
+          if (user) navigate('/login')
+        } catch (error) {
+          setError(error)
+        }
     }
 
   return (
@@ -48,6 +53,7 @@ const SignUp = ({logUser}) => {
       <button type='submit'>Sign Up</button>
       </form>
       <p>Already a user? <Link to='/login'>Log in here.</Link></p>
+      {error && <p className="error-msg">{error.message}. Please try again.</p>}
     </div>
   )
 };
